@@ -5,6 +5,7 @@ require_relative 'alarm/slack'
 require_relative 'alarm/cfg'
 require_relative 'alarm/message'
 require_relative 'alarm/collector'
+require_relative 'alarm/webhook'
 require_relative 'mtr'
 require_relative 'paste'
 
@@ -41,6 +42,7 @@ class SQA
       @methods  << Exec.new    if CFG.exec.command?
       @methods  << Slack.new   if CFG.slack.url?
       @methods  << Collector.new
+      @methods  << Webhook.new if CFG.webhook.url?
       @hostname = Ring::SQA::CFG.host.name
       @afi      = Ring::SQA::CFG.afi
       @alarm    = false
